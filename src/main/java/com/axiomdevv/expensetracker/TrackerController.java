@@ -302,18 +302,11 @@ public class TrackerController {
         barChart.getData().clear();
         barChart.getData().add(series);
 
-
-
-
     }
 
     public void toggleDarkMode() {
         String css = getClass().getResource(darkModeToggle.isSelected() ? "DarkModeStyle.css" : "LightModeStyle.css").toExternalForm();
         table.getScene().getStylesheets().setAll(css);
+        darkModeToggle.setText(darkModeToggle.isSelected() ? "☀ LightMode" : "🌙  Dark Mode");
     }
-
-
-
-
-
 }

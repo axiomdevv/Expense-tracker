@@ -199,45 +199,45 @@
                                     </children>
                                 </VBox>
 
-                                <VBox id="chart-side"
-                                      alignment="TOP_CENTER"
-                                      prefWidth="310.0"
-                                      spacing="10.0">
-                                    <children>
-                                        <HBox alignment="CENTER">
-                                            <children>
-                                                <ToggleButton id="cat-toggle"
-                                                              fx:id="categoryToggle"
-                                                              text="By Category"
-                                                              prefWidth="120.0"
-                                                              selected="true"
-                                                              toggleGroup="$chartToggleGroup"
-                                                              onAction="#updateChart"/>
-                                                <ToggleButton id="income-toggle"
-                                                              fx:id="incomeExpenseToggle"
-                                                              text="Income / Exp"
-                                                              prefWidth="130.0"
-                                                              toggleGroup="$chartToggleGroup"
-                                                              onAction="#updateChart"/>
-                                            </children>
-                                        </HBox>
-
-                                        <PieChart fx:id="pieChart"
-                                                  prefHeight="370.0"
-                                                  prefWidth="290.0"
-                                                  animated="true"
-                                                  legendVisible="true"
-                                                  labelsVisible="true"
-                                                  VBox.vgrow="ALWAYS"/>
-                                    </children>
-                                </VBox>
-
                             </children>
                         </HBox>
 
                         <!-- ─────────────────────────────────────
                              AREA CHART
                         ───────────────────────────────────────── -->
+                        <VBox id="chart-side"
+                              alignment="TOP_CENTER"
+                              prefWidth="310.0"
+                              spacing="10.0">
+                            <children>
+                                <HBox alignment="CENTER">
+                                    <children>
+                                        <ToggleButton id="cat-toggle"
+                                                      fx:id="categoryToggle"
+                                                      text="By Category"
+                                                      prefWidth="120.0"
+                                                      selected="true"
+                                                      toggleGroup="$chartToggleGroup"
+                                                      onAction="#updateChart"/>
+                                        <ToggleButton id="income-toggle"
+                                                      fx:id="incomeExpenseToggle"
+                                                      text="Income / Exp"
+                                                      prefWidth="130.0"
+                                                      toggleGroup="$chartToggleGroup"
+                                                      onAction="#updateChart"/>
+                                    </children>
+                                </HBox>
+
+                                <PieChart fx:id="pieChart"
+                                          prefHeight="370.0"
+                                          prefWidth="290.0"
+                                          animated="true"
+                                          legendVisible="true"
+                                          labelsVisible="true"
+                                          VBox.vgrow="ALWAYS"/>
+                            </children>
+                        </VBox>
+
                         <VBox id="bar-chart-side" spacing="8.0">
                             <children>
                                 <HBox alignment="CENTER_LEFT" spacing="10.0">
