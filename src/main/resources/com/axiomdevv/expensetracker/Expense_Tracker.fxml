@@ -22,6 +22,7 @@
 <!--
     Root: StackPane
 -->
+<?import javafx.scene.shape.Circle?>
 <StackPane id="outer-bg"
            prefWidth="1150.0"
            prefHeight="720.0"
@@ -137,11 +138,11 @@
                                     </children>
                                 </VBox>
 
-                                <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+                                <VBox id="income-card" HBox.hgrow="ALWAYS">
                                     <children>
-                                        <Label styleClass="stat-label" text="Total Income"/>
+                                        <Label styleClass="stat-label,income-card-label" text="Total Income"/>
                                         <Label fx:id="totalIncome"
-                                               styleClass="stat-value,income-value"
+                                               styleClass="stat-value,income-card-value"
                                                text="0.00"/>
                                     </children>
                                 </VBox>
@@ -228,13 +229,20 @@
                                     </children>
                                 </HBox>
 
-                                <PieChart fx:id="pieChart"
-                                          prefHeight="370.0"
-                                          prefWidth="290.0"
-                                          animated="true"
-                                          legendVisible="true"
-                                          labelsVisible="true"
-                                          VBox.vgrow="ALWAYS"/>
+                                <StackPane VBox.vgrow="ALWAYS">
+                                    <children>
+                                        <PieChart fx:id="pieChart"
+                                                  prefHeight="370.0"
+                                                  prefWidth="290.0"
+                                                  animated="true"
+                                                  legendVisible="true"
+                                                  legendSide="BOTTOM"
+                                                  labelsVisible="true"/>
+                                        <Circle fx:id="doughnutHole"
+                                                radius="65.0"
+                                                fill="#FFFFFF"/>
+                                    </children>
+                                </StackPane>
                             </children>
                         </VBox>
 

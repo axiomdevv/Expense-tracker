@@ -2,10 +2,15 @@ package com.axiomdevv.expensetracker;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.PauseTransition;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.chart.AreaChart;
 import javafx.scene.chart.BarChart;
@@ -13,6 +18,10 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.util.Duration;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,11 +34,11 @@ import java.util.*;
 import java.util.function.Predicate;
 
 public class TrackerController {
+    @FXML private Circle doughnutHole;
     @FXML private AreaChart<String,Number> barChart;
     @FXML private TextField descriptionField,amountField;
     @FXML private ComboBox<String> categoryBox;
     @FXML private DatePicker datePicker;
-    @FXML private Button addButton,clearButton,deleteButton;
     @FXML private Label totalBalance;
     @FXML private TableView<Expense> table;
     @FXML private TableColumn<Expense,String> descriptionColumn,dateColumn,categoryColumn;
@@ -38,10 +47,22 @@ public class TrackerController {
     @FXML private ToggleButton categoryToggle;
     @FXML private ToggleButton incomeExpenseToggle;
     @FXML private ToggleGroup chartToggleGroup;
-    @FXML private Label totalExpenses , totalIncome , netSavings;
+    @FXML private Label totalExpenses , totalIncome;
     @FXML private ToggleButton dayToggle , monthToggle, yearToggle ,darkModeToggle;
-    @FXML private ToggleGroup barToggleGroup;
 
+    private static final Map<String, String> PIE_COLORS = Map.ofEntries(
+            Map.entry("Housing",       "#0D6B3E"),
+            Map.entry("Utilities",     "#67C48A"),
+            Map.entry("Food",          "#084D2C"),
+            Map.entry("Transport",     "#D46A6A"),
+            Map.entry("Insurance",     "#23844F"),
+            Map.entry("Debt",          "#8FE0B0"),
+            Map.entry("Healthcare",    "#C99A00"),
+            Map.entry("Entertainment", "#0B5A33"),
+            Map.entry("Clothing",      "#B8C0BC"),
+            Map.entry("Income",        "#23844F"),
+            Map.entry("Expenses",      "#D46A6A")
+    );
 
 
 
@@ -76,6 +97,14 @@ public class TrackerController {
             if (newToggle == null) oldToggle.setSelected(true);
         });
 
+        Platform.runLater(() -> {
+            //Here : we can use Node class but it doesn't have width and height as readable properties. Region is a subclass of Node that adds those , it represents any node that has a measurable size.
+            Region legend = (Region)pieChart.lookup(".chart-legend");
+            //lookup() is like CSS search, same as querySelector()
+            if (legend != null) {
+                doughnutHole.translateYProperty().bind(legend.heightProperty().divide(-2));
+            }
+        });
     }
 
     public void checkDateFormat(){
@@ -239,9 +268,15 @@ public class TrackerController {
                     totals.merge(e.getCategory().getDisplayName(),Math.abs(e.getAmount()),Double::sum);
                 }
             }
+
+            double tot = totals.values().stream().mapToDouble(Double::doubleValue).sum();
+
             totals.forEach((category,total)->{
-                slices.add(new PieChart.Data(category,total));
+                double percent = total > 0 ? (total/tot) * 100 : 0 ;
+                String label = String.format("%s (%.0f%%)",category,percent);
+                slices.add(new PieChart.Data(label,total));
             });
+
         }else if (incomeExpenseToggle.isSelected()){
             double income = 0;
             double expenses = 0;
@@ -253,11 +288,41 @@ public class TrackerController {
                     expenses += Math.abs(e.getAmount());
                 }
             }
-            if(income > 0) slices.add(new PieChart.Data("Income",income));
-            if(expenses > 0) slices.add(new PieChart.Data("Expenses",expenses));
+
+            double tot = income + expenses;
+
+            if(income > 0) {
+                double percent = (income/ tot) * 100;
+                slices.add(new PieChart.Data(String.format("Income (%.0f%%)",percent),income));
+            }
+            if(expenses > 0) {
+                double percent = (expenses/ tot) * 100;
+                slices.add(new PieChart.Data(String.format("Expenses (%.0f%%)",percent),expenses));
+
+            }
+        }
+
+        doughnutHole.setRadius(0);
+
+        for (PieChart.Data d : slices) {
+            d.nodeProperty().addListener((obs, oldNode, newNode) -> {
+                if (newNode == null) return;
+                String name = d.getName().contains(" (")
+                        ? d.getName().substring(0, d.getName().indexOf(" ("))
+                        : d.getName();
+                String color = PIE_COLORS.getOrDefault(name, "#B8C0BC");
+                Platform.runLater(() -> newNode.setStyle("-fx-pie-color: " + color + ";"));
+            });
         }
 
         pieChart.setData(slices);
+
+        //Adding Zoom out Animation to the circle inside the pieChart so it goes with the slices animation
+        Timeline grow = new Timeline(
+                new KeyFrame(Duration.millis(500),
+                        new KeyValue(doughnutHole.radiusProperty(), 65))
+        );
+        grow.play();
 
     }
 
@@ -308,5 +373,7 @@ public class TrackerController {
         String css = getClass().getResource(darkModeToggle.isSelected() ? "DarkModeStyle.css" : "LightModeStyle.css").toExternalForm();
         table.getScene().getStylesheets().setAll(css);
         darkModeToggle.setText(darkModeToggle.isSelected() ? "☀ LightMode" : "🌙  Dark Mode");
+        doughnutHole.setFill(darkModeToggle.isSelected() ? Color.web("#1E293B") : Color.web("#FFFFFF"));
+
     }
 }
