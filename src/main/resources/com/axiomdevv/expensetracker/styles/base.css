@@ -1,0 +1,243 @@
+/* Shared geometry and typography. Theme files contain the colors. */
+.root {
+    -fx-font-family: "Avenir Next";
+    -fx-font-size: 13px;
+}
+
+#main-container {
+    -fx-background-radius: 18;
+}
+
+#top-bar {
+    -fx-background-radius: 18 18 0 0;
+    -fx-border-width: 0 0 1 0;
+}
+
+.app-title {
+    -fx-font-size: 22px;
+    -fx-font-weight: 800;
+}
+
+.app-subtitle,
+.section-description {
+    -fx-font-size: 11px;
+}
+
+.status-label {
+    -fx-font-size: 11px;
+    -fx-padding: 6 10;
+    -fx-background-radius: 8;
+}
+
+#theme-toggle {
+    -fx-padding: 8 13;
+    -fx-background-radius: 9;
+    -fx-border-radius: 9;
+    -fx-border-width: 1;
+    -fx-cursor: hand;
+}
+
+#dashboard-scroll,
+#dashboard-scroll > .viewport {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.sidebar,
+.content-card,
+.stat-card {
+    -fx-background-radius: 14;
+    -fx-border-radius: 14;
+    -fx-border-width: 1;
+}
+
+.content-card {
+    -fx-padding: 18;
+}
+
+.section-kicker,
+.stat-label {
+    -fx-font-size: 10px;
+    -fx-font-weight: 800;
+}
+
+.section-kicker {
+    -fx-padding: 0 0 2 0;
+}
+
+.section-heading {
+    -fx-font-size: 16px;
+    -fx-font-weight: 800;
+}
+
+.field-label {
+    -fx-font-size: 11px;
+    -fx-font-weight: 700;
+}
+
+.text-field,
+.combo-box,
+.date-picker {
+    -fx-min-height: 38px;
+    -fx-background-radius: 9;
+    -fx-border-radius: 9;
+    -fx-border-width: 1;
+}
+
+.text-field {
+    -fx-padding: 8 11;
+}
+
+.combo-box .list-cell {
+    -fx-padding: 7 10;
+}
+
+.combo-box .arrow-button,
+.date-picker .arrow-button {
+    -fx-background-color: transparent;
+}
+
+.date-picker .text-field {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.button {
+    -fx-min-height: 36px;
+    -fx-padding: 8 14;
+    -fx-background-radius: 9;
+    -fx-border-radius: 9;
+    -fx-border-width: 1;
+    -fx-font-weight: 700;
+    -fx-cursor: hand;
+}
+
+#add-button {
+    -fx-border-color: transparent;
+}
+
+#delete-button {
+    -fx-min-height: 32px;
+    -fx-padding: 6 11;
+    -fx-font-size: 11px;
+}
+
+.form-feedback {
+    -fx-font-size: 11px;
+    -fx-padding: 8 10;
+    -fx-background-radius: 8;
+}
+
+.stat-card {
+    -fx-min-width: 160px;
+}
+
+.stat-value {
+    -fx-font-size: 23px;
+    -fx-font-weight: 800;
+    -fx-padding: 3 0 0 0;
+}
+
+.toggle-button {
+    -fx-min-height: 32px;
+    -fx-padding: 6 12;
+    -fx-border-width: 1;
+    -fx-font-size: 11px;
+    -fx-cursor: hand;
+}
+
+#category-toggle,
+#day-toggle {
+    -fx-background-radius: 8 0 0 8;
+    -fx-border-radius: 8 0 0 8;
+}
+
+#income-expense-toggle,
+#year-toggle {
+    -fx-background-radius: 0 8 8 0;
+    -fx-border-radius: 0 8 8 0;
+}
+
+#month-toggle {
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+}
+
+.table-view {
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-width: 1;
+    -fx-table-cell-border-color: transparent;
+}
+
+.table-view .column-header-background {
+    -fx-background-radius: 10 10 0 0;
+}
+
+.table-view .column-header,
+.table-view .filler {
+    -fx-background-color: transparent;
+    -fx-size: 38px;
+}
+
+.table-view .column-header .label {
+    -fx-font-size: 11px;
+    -fx-font-weight: 800;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 0 8;
+}
+
+.table-row-cell {
+    -fx-cell-size: 41px;
+    -fx-border-width: 0 0 1 0;
+}
+
+.table-cell {
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 0 8;
+}
+
+.amount-income,
+.amount-expense {
+    -fx-font-weight: 800;
+}
+
+.chart,
+.chart-plot-background,
+.chart-legend {
+    -fx-background-color: transparent;
+}
+
+.chart {
+    -fx-padding: 4 0 0 0;
+}
+
+.chart-legend-item,
+.chart-pie-label,
+.axis {
+    -fx-font-size: 10px;
+}
+
+.doughnut-hole {
+    -fx-stroke-width: 0;
+}
+
+.empty-state {
+    -fx-font-size: 12px;
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+    -fx-max-width: 210px;
+}
+
+.default-color0.chart-series-area-line {
+    -fx-stroke-width: 2.5;
+}
+
+.scroll-bar .thumb {
+    -fx-background-radius: 5;
+}
+
+.scroll-bar .increment-button,
+.scroll-bar .decrement-button {
+    -fx-padding: 2;
+}

@@ -1,8 +1,9 @@
-package com.axiomdevv.expensetracker;
+package com.axiomdevv.expensetracker.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
+/** The supported income and expense categories. */
 public enum Category {
     INCOME("Income"),
     HOUSING("Housing"),
@@ -25,30 +26,29 @@ public enum Category {
         return displayName;
     }
 
+    public boolean isIncome() {
+        return this == INCOME;
+    }
+
     @JsonValue
     @Override
     public String toString() {
         return displayName;
     }
 
-    public static String[] toStringArray(){
-        String[] stringArray = new String[values().length];
-        int i = 0;
-        for(Category c : values()){
-            stringArray[i++] = c.toString();
-        }
-        return stringArray;
-    }
-
     @JsonCreator
-    public static Category fromString(String displayName) {
-        for (Category c : values()) {
-            if (c.displayName.equals(displayName)) {
-                return c;
+    public static Category fromString(String value) {
+        if (value == null) {
+            return null;
+        }
+
+        for (Category category : values()) {
+            if (category.displayName.equalsIgnoreCase(value)
+                    || category.name().equalsIgnoreCase(value)) {
+                return category;
             }
         }
-        return null;
+
+        throw new IllegalArgumentException("Unknown category: " + value);
     }
 }
-
-

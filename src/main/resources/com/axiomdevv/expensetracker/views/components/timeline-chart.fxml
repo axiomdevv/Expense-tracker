@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.AreaChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox styleClass="content-card"
+      spacing="10.0"
+      maxWidth="1.7976931348623157E308"
+      xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.axiomdevv.expensetracker.ui.TimelineChartController">
+
+    <fx:define>
+        <ToggleGroup fx:id="timelinePeriodGroup"/>
+    </fx:define>
+
+    <HBox alignment="CENTER_LEFT" spacing="10.0">
+        <VBox spacing="2.0">
+            <Label styleClass="section-heading" text="Expenses over time"/>
+            <Label styleClass="section-description" text="Only outgoing transactions are included"/>
+        </VBox>
+        <Region HBox.hgrow="ALWAYS"/>
+        <HBox spacing="0.0">
+            <ToggleButton fx:id="dayToggle"
+                          id="day-toggle"
+                          text="Daily"
+                          toggleGroup="$timelinePeriodGroup"
+                          onAction="#refresh"/>
+            <ToggleButton fx:id="monthToggle"
+                          id="month-toggle"
+                          text="Monthly"
+                          selected="true"
+                          toggleGroup="$timelinePeriodGroup"
+                          onAction="#refresh"/>
+            <ToggleButton fx:id="yearToggle"
+                          id="year-toggle"
+                          text="Yearly"
+                          toggleGroup="$timelinePeriodGroup"
+                          onAction="#refresh"/>
+        </HBox>
+    </HBox>
+
+    <StackPane minHeight="300.0">
+        <AreaChart fx:id="timelineChart"
+                   animated="true"
+                   legendVisible="false"
+                   createSymbols="true"
+                   StackPane.alignment="CENTER">
+            <xAxis>
+                <CategoryAxis side="BOTTOM"/>
+            </xAxis>
+            <yAxis>
+                <NumberAxis side="LEFT" forceZeroInRange="true"/>
+            </yAxis>
+        </AreaChart>
+        <Label fx:id="timelineEmptyLabel"
+               styleClass="empty-state"
+               text="Add an expense to build your timeline."
+               visible="true"/>
+    </StackPane>
+</VBox>

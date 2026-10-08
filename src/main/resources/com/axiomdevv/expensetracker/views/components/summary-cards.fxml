@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox styleClass="summary-row"
+      spacing="12.0"
+      xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.axiomdevv.expensetracker.ui.SummaryCardsController">
+
+    <VBox styleClass="stat-card,balance-card" HBox.hgrow="ALWAYS">
+        <padding><Insets top="17.0" right="19.0" bottom="17.0" left="19.0"/></padding>
+        <Label styleClass="stat-label" text="AVAILABLE BALANCE"/>
+        <Label fx:id="totalBalance" styleClass="stat-value" text="0.00"/>
+    </VBox>
+
+    <VBox styleClass="stat-card,income-card" HBox.hgrow="ALWAYS">
+        <padding><Insets top="17.0" right="19.0" bottom="17.0" left="19.0"/></padding>
+        <Label styleClass="stat-label" text="MONEY IN"/>
+        <Label fx:id="totalIncome" styleClass="stat-value,income-value" text="0.00"/>
+    </VBox>
+
+    <VBox styleClass="stat-card,expense-card" HBox.hgrow="ALWAYS">
+        <padding><Insets top="17.0" right="19.0" bottom="17.0" left="19.0"/></padding>
+        <Label styleClass="stat-label" text="MONEY OUT"/>
+        <Label fx:id="totalExpenses" styleClass="stat-value,expense-value" text="0.00"/>
+    </VBox>
+</HBox>

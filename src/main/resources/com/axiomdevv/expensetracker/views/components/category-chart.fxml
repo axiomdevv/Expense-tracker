@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+
+<VBox styleClass="content-card"
+      spacing="10.0"
+      maxWidth="1.7976931348623157E308"
+      maxHeight="1.7976931348623157E308"
+      xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.axiomdevv.expensetracker.ui.CategoryChartController">
+
+    <fx:define>
+        <ToggleGroup fx:id="categoryModeGroup"/>
+    </fx:define>
+
+    <Label styleClass="section-heading" text="Spending mix"/>
+    <Label styleClass="section-description" text="How your transactions are distributed"/>
+
+    <HBox alignment="CENTER" spacing="0.0">
+        <ToggleButton fx:id="categoryToggle"
+                      id="category-toggle"
+                      text="Categories"
+                      selected="true"
+                      toggleGroup="$categoryModeGroup"
+                      onAction="#refresh"/>
+        <ToggleButton fx:id="incomeExpenseToggle"
+                      id="income-expense-toggle"
+                      text="In vs out"
+                      toggleGroup="$categoryModeGroup"
+                      onAction="#refresh"/>
+    </HBox>
+
+    <StackPane VBox.vgrow="ALWAYS">
+        <PieChart fx:id="categoryChart"
+                  animated="true"
+                  legendVisible="true"
+                  legendSide="BOTTOM"
+                  labelsVisible="true"/>
+
+        <Label fx:id="chartEmptyLabel"
+               styleClass="empty-state"
+               text="Add an expense to see your spending mix."
+               wrapText="true"
+               visible="true"/>
+    </StackPane>
+</VBox>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane id="outer-bg"
+           prefWidth="1180.0"
+           prefHeight="760.0"
+           xmlns="http://javafx.com/javafx/21"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.axiomdevv.expensetracker.ui.TrackerController">
+
+    <BorderPane id="main-container">
+        <StackPane.margin>
+            <Insets top="18.0" right="18.0" bottom="18.0" left="18.0"/>
+        </StackPane.margin>
+
+        <top>
+            <HBox id="top-bar" alignment="CENTER_LEFT" spacing="16.0">
+                <padding>
+                    <Insets top="16.0" right="22.0" bottom="16.0" left="22.0"/>
+                </padding>
+                <VBox spacing="2.0">
+                    <Label styleClass="app-title" text="Expense Tracker"/>
+                    <Label styleClass="app-subtitle" text="A clear view of where your money goes"/>
+                </VBox>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label fx:id="statusLabel"
+                       styleClass="status-label,status-normal"
+                       text="Local data is stored automatically."/>
+                <ToggleButton fx:id="themeToggle"
+                              id="theme-toggle"
+                              text="☾  Dark mode"
+                              onAction="#handleThemeToggle"/>
+            </HBox>
+        </top>
+
+        <left>
+            <StackPane prefWidth="264.0">
+                <BorderPane.margin>
+                    <Insets top="16.0" right="8.0" bottom="16.0" left="16.0"/>
+                </BorderPane.margin>
+                <fx:include fx:id="expenseForm" source="components/expense-form.fxml"/>
+            </StackPane>
+        </left>
+
+        <center>
+            <ScrollPane id="dashboard-scroll"
+                        fitToWidth="true"
+                        hbarPolicy="AS_NEEDED"
+                        vbarPolicy="AS_NEEDED">
+                <VBox spacing="14.0">
+                    <padding>
+                        <Insets top="16.0" right="16.0" bottom="22.0" left="8.0"/>
+                    </padding>
+
+                    <fx:include fx:id="summaryCards" source="components/summary-cards.fxml"/>
+
+                    <HBox spacing="14.0" minHeight="390.0">
+                        <StackPane HBox.hgrow="ALWAYS">
+                            <fx:include fx:id="expenseTable" source="components/expense-table.fxml"/>
+                        </StackPane>
+                        <StackPane prefWidth="350.0" minWidth="320.0" maxWidth="390.0">
+                            <fx:include fx:id="categoryChart" source="components/category-chart.fxml"/>
+                        </StackPane>
+                    </HBox>
+
+                    <fx:include fx:id="timelineChart" source="components/timeline-chart.fxml"/>
+                </VBox>
+            </ScrollPane>
+        </center>
+    </BorderPane>
+</StackPane>
